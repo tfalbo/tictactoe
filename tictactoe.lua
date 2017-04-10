@@ -50,7 +50,7 @@ end
 
 -- Checa se deu velha
 function checkTie()
-	flag = true
+	local flag = true
 	for i=1,9 do
 		if board[i] == " " then
 			flag = false
