@@ -1,27 +1,42 @@
+--------------------------------------------------
+-- Thaissa Falbo
+-- 1421110
 -- TicTacToe em Lua
+--------------------------------------------------
+
 
 -- Variáveis Globais
-
 board = {}
 
 
--- Preenche vetor tabuleiro
 function createBoard()
+--------------------------------------------------
+-- Preenche vetor tabuleiro com espaços em branco
+--------------------------------------------------
 	for i=1,9 do
 		board[i] = ' '
 	end
 end
 
--- Desenha tabuleiro
 function drawBoard()
+--------------------------------------------------
+-- Desenha tabuleiro
+--------------------------------------------------
 	print(board[1] .. " | " .. board[2] .. " | " .. board[3])
         print(board[4] .. " | " .. board[5] .. " | " .. board[6])
         print(board[7] .. " | " .. board[8] .. " | " .. board[9])
 end
 
 
--- Coloca a peca
 function placePiece(coordinate, piece)
+--------------------------------------------------
+-- Coloca a peca no tabuleiro
+-- Parâmetros: coordenada, peça correspondente 
+-- ao jogador
+-- Return:
+--	true: se a peça for colocada com sucesso
+--	false: se a coordenada já estiver ocupada
+--------------------------------------------------
 	if board[coordinate] == ' ' then
 		board[coordinate] = piece
 		return true
@@ -31,8 +46,11 @@ function placePiece(coordinate, piece)
 end
 
 
--- Turno do jogador
 function play(piece)
+--------------------------------------------------
+-- Turno do jogador
+-- Parâmetro: peça correspondente ao jogador
+--------------------------------------------------
 	io.write(piece.. ", aqui está o tabuleiro:\n")
 	drawBoard()
 	local placed = false
@@ -48,8 +66,13 @@ function play(piece)
 	io.write("\n")
 end
 
--- Checa se deu velha
 function checkTie()
+--------------------------------------------------
+-- Checa se deu empate(velha)
+-- Return: 
+--	true: caso haja empate
+--	false: caso contrário
+--------------------------------------------------
 	local flag = true
 	for i=1,9 do
 		if board[i] == " " then
@@ -59,8 +82,13 @@ function checkTie()
 	return flag
 end
 
--- Checa se alguem ganhou
 function checkWin()
+--------------------------------------------------
+-- Checa se alguem ganhou
+-- Return: 
+--	caracter correspondente ao ganhador, caso haja
+--	0, caso não haja ganhador	
+--------------------------------------------------
 -- Confere Horizontais
 	if     board[1] == board[2] and board[1] == board[3] then return board[1]
 	elseif board[4] == board[5] and board[4] == board[6] then return board[4] 
@@ -80,6 +108,12 @@ end
 
 
 function gameOver()
+--------------------------------------------------
+-- Checa se o jogo acabou
+-- Return: 
+-- 	true se alguém ganhou ou se o jogo empatou
+--	false, caso contrário
+--------------------------------------------------
 	local winner = checkWin()
 	if(winner ~= 0 and winner ~= " " ) then
 		print("O ganhador e " .. winner .. "\n") 
@@ -92,6 +126,11 @@ end
 
 
 -- Principal
+--------------------------------------------------
+-- Parte principal do jogo
+-- Controla o turno entre os jogadores e a condição
+-- de fim de jogo
+--------------------------------------------------
 io.write("Começa o Jogo da Velha!\n\n")
 createBoard()
 drawBoard()
