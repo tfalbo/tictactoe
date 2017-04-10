@@ -8,21 +8,21 @@ board = {}
 -- Preenche vetor tabuleiro
 function createBoard()
 	for i=1,9 do
-		board[i] = 0
+		board[i] = ' '
 	end
 end
 
 -- Desenha tabuleiro
 function drawBoard()
-	for i,v in ipairs(board) do
-		print(v)
-	end
+	print(board[1] .. " | " .. board[2] .. " | " .. board[3])
+        print(board[4] .. " | " .. board[5] .. " | " .. board[6])
+        print(board[7] .. " | " .. board[8] .. " | " .. board[9])
 end
 
 
 -- Coloca a peca
 function placePiece(coordinate, piece)
-	if board[coordinate] == 0 then
+	if board[coordinate] == ' ' then
 		board[coordinate] = piece
 		return true
 	else
