@@ -5,8 +5,9 @@
 
 ## Arquivos
 
-* README.md
 * DIARIO.md
+* EVTX.md
+* README.md
 * tictactoe.lua
 
 
