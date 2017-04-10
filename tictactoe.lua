@@ -48,9 +48,48 @@ function play(piece)
 	io.write("\n")
 end
 
+-- Checa se deu velha
+function checkTie()
+	flag = true
+	for i=1,9 do
+		if board[i] == " " then
+			flag = false
+		end
+	end
+	return flag
+end
+
 -- Checa se alguem ganhou
 function checkWin()
+-- Confere Horizontais
+	if     board[1] == board[2] and board[1] == board[3] then return board[1]
+	elseif board[4] == board[5] and board[4] == board[6] then return board[4] 
+	elseif board[7] == board[8] and board[7] == board[9] then return board[7] end
+
+-- Confere Verticais
+	if     board[1] == board[4] and board[1] == board[7] then return board[1] 
+	elseif board[2] == board[5] and board[2] == board[8] then return board[2] 
+	elseif board[3] == board[2] and board[6] == board[9] then return board[3] end
+
+-- Confere Diagonais
+	if board[1] == board[5] and board[1] == board[9] then return board[1]
+	elseif board[3] == board[5] and board[3] == board[7] then return board[5] end
+
+	return 0
+end 
+
+
+function gameOver()
+	local winner = checkWin()
+	if(winner ~= 0 and winner ~= " " ) then
+		print("O ganhador e " .. winner .. "\n") 
+		return true
+	elseif checkTie() == true then
+		print ("Deu velha!")
+		return true
+	end
 end
+
 
 -- Principal
 io.write("Começa o Jogo da Velha!\n\n")
@@ -59,7 +98,12 @@ drawBoard()
 
 while true do
 	
+	-- Checa se o jogo acabou (alguem ganhou ou deu velha)
+	if gameOver() == true then break end	
 	play('x') 
+	
+	-- Checa se o jogo acabou (alguem ganhou ou deu velha)
+	if gameOver() == true then break end
 	play('o')
 
 end
